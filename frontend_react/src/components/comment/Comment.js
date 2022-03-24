@@ -5,24 +5,23 @@ import useAxios from "../../utils/useAxios";
 import Buttons from "../buttons/Buttons";
 import EditCommentPopup from "../editCommentPopup/EditCommentPopup";
 
-function Comment(comment, setComments) {
+function Comment(comment, { setComments }) {
   const [getComment, setGetComment] = useState({});
-  const { userInfo, handleEditCommPopupOpen, closePopup, isComPopupOpen } =
+  const { handleEditCommPopupOpen, closePopup, isComPopupOpen } =
     useContext(MainContext);
-  const { authTokens } = useContext(AuthContext);
+  const { authTokens, user } = useContext(AuthContext);
   let api = useAxios();
-  useEffect(() => {
-    handleGetComment();
-  }, []);
 
-  const handleGetComment = async () => {
-    const response = await api.get(
-      `/ads/${comment.adId}/comments/${comment.commentId}/`
-    );
-    if (response.status === 200) {
-      setGetComment(response.data);
-    }
-  };
+  useEffect(() => {
+    const handleGetComment = async () => {
+      const response = await api.get(
+        `/ads/${comment.adId}/comments/${comment.commentId}/`
+      );
+      if (response.status === 200) {
+        setGetComment(response.data);
+      }
+    };
+  }, []);
 
   const editComment = async (e) => {
     e.preventDefault();
@@ -70,13 +69,16 @@ function Comment(comment, setComments) {
       console.log("error!");
     }
   };
-   
+
   return (
     <>
       <li className="comment" key={comment.pk}>
-        <p className="comment-text comment__author-text">Миша</p>
-        <p className="comment-text">{comment.text}</p>
-        {userInfo.id === comment.userId ? (
+        <p className="comment-text comment__author-text">
+          {comment.authorName}
+        </p>
+        <div className="commentBox">
+        <p className="comment-text comment-message">{comment.text}</p>
+        {user.user_id === comment.userId ? (
           <Buttons
             className="comment-buttons"
             classButton="comment-button"
@@ -84,6 +86,7 @@ function Comment(comment, setComments) {
             onSubmit={deleteComment}
           />
         ) : null}
+        </div>
       </li>
       <EditCommentPopup
         onClose={closePopup}

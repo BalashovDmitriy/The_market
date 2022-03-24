@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Switch, Route } from "react-router-dom";
-import { AuthProvider } from "../../context/AuthContext";
-import { MainContextStates } from "../../context/MainContext";
 import Footer from "../footer/Footer";
 import PopupNavigation from "../popopNavigation/PopupNavigation";
 import Header from "../header/Header";
@@ -18,13 +16,12 @@ import ChangePassword from "../changePassword/ChangePassword";
 function App() {
   const [isPopupNavigatorOpen, setIsPopupNavigatorOpen] = useState(false);
   let history = useHistory();
+  const closePopup = () => {
+    setIsPopupNavigatorOpen(false);
+  };
 
   const handleOpenPopup = () => {
     setIsPopupNavigatorOpen(true);
-  };
-
-  const closePopup = () => {
-    setIsPopupNavigatorOpen(false);
   };
 
   useEffect(() => {
@@ -63,32 +60,24 @@ function App() {
 
   return (
     <div className="App">
-      <AuthProvider>
-        <Header onOpen={handleOpenPopup} logOut={logoutUser} />
-        <Switch>
-          <Route exact path="/sign-in" component={Login} />
-          <Route exact path="/sign-up">
-            <Registration />
-          </Route>
-          <Route exact path="/sign-in/email" component={EmailLink} />
-          <Route
-            exact
-            path="/sign-in/email/newpassword"
-            component={ChangePassword}
-          />
-          <MainContextStates>
-            <PrivateRoute exact path="/profile" component={UserProfile} />
-            <PrivateRoute exact path="/ads/:id" component={SinglePage} />
-            <PrivateRoute
-              exact
-              path="/profile/ads/:id"
-              component={SinglePage}
-            />
-            <PrivateRoute exact path="/newAd" component={AddCard} />
-            <Route exact path="/" component={Main} />
-          </MainContextStates>
-        </Switch>
-      </AuthProvider>
+      <Header onOpen={handleOpenPopup} logOut={logoutUser} />
+      <Switch>
+        <Route exact path="/sign-in" component={Login} />
+        <Route exact path="/sign-up">
+          <Registration />
+        </Route>
+        <Route exact path="/sign-in/email/" component={EmailLink} />
+        <Route
+          exact
+          path="/password/reset/confirm/:Ng/:id/"
+          component={ChangePassword}
+        />
+        <PrivateRoute exact path="/profile/" component={UserProfile} />
+        <PrivateRoute exact path="/ads/:id" component={SinglePage} />
+        <PrivateRoute exact path="/profile/ads/:id/" component={SinglePage} />
+        <PrivateRoute exact path="/newAd" component={AddCard} />
+        <Route exact path="/" component={Main} />
+      </Switch>
       <Footer />
       <PopupNavigation
         onClose={closePopup}

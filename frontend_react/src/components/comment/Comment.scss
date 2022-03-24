@@ -1,5 +1,6 @@
 .comment {
     display: flex;
+    flex-direction: column;
     width: 100%;
     margin-bottom: 12px;
     justify-content: space-between;
@@ -13,19 +14,26 @@
     @include cardDescription();
     font-size: 0.9em;
     text-align: left;
-    &:last-of-type {
-        @media screen and (max-width: 690px){
-            width: 50%;
-        }
-    }
+}
+
+.commentBox {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 8px;
 }
 
 .comment__author-text {
     align-self: flex-start;
 }
 
+.comment-message {
+    width: 70%;
+}
+
 .comment-buttons {
     display: flex;
+    width: 20%;
     justify-content: center;
     align-items: flex-start;
 }
