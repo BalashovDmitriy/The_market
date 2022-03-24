@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:12.4-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: skymarket
+      POSTGRES_PASSWORD: skymarket
+      POSTGRES_DB: skymarket
+    restart: always
+    ports:
+    - "5432:5432"
+
+  frontend:
+    build: ../frontend_react/.
+    volumes:
+      - frontend:/app/result_build
+    depends_on:
+      - db
+    ports:
+      - "3000:3000"
+      - "8000:8000"
+
+
+volumes:
+  postgres_data:  
+  frontend:

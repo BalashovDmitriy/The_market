@@ -1,0 +1,48 @@
+.comment {
+    display: flex;
+    width: 100%;
+    margin-bottom: 12px;
+    justify-content: space-between;
+    align-items: flex-start;
+    &:first-of-type {
+        margin-top: 12px;
+    }
+}
+
+.comment-text {
+    @include cardDescription();
+    font-size: 0.9em;
+    text-align: left;
+    &:last-of-type {
+        @media screen and (max-width: 690px){
+            width: 50%;
+        }
+    }
+}
+
+.comment__author-text {
+    align-self: flex-start;
+}
+
+.comment-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.comment-button {
+    width: 8px;
+    height: 8px;
+    background-size: 8px 8px;
+    background-repeat: no-repeat;
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+    &:hover{
+        opacity: 0.3;
+    }
+}
+
+.comment-author {
+    background-color: #fff;
+}

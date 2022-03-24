@@ -1,0 +1,45 @@
+.Comment__form {
+  @include flexColumn;
+  margin-top: 8px;
+}
+
+.Comment__label {
+  @include label();
+  margin: 0;
+}
+
+.Comment__form-title {
+  @include inputTitle();
+}
+
+.Comment__input {
+  @include input();
+  width: 100%;
+  margin: 0 auto;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
+}
+
+.Comment__input-hidden {
+  @include inputHidden();
+}
+
+.Comment__input-error {
+  @include inputError;
+}
+
+.Comment__button {
+  @include buttonSubmit();
+  background-color: #fff;
+  align-self: flex-end;
+}
+
+.Comment__button-text {
+  @include buttonText();
+  color: #6464b9;
+}
+
+.Comment__button_disabled {
+  @include buttonDisabled();
+}

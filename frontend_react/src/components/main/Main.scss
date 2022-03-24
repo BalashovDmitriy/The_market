@@ -1,0 +1,17 @@
+.Main {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  width: 1440px;
+  padding: 80px 2%;
+  @media screen and (min-width: 1000px) and (max-width: 1439px) {
+    width: 80%;
+  }
+  @media screen and (max-width: 999px) {
+    width: 90%;
+  }
+}
+
+.main-pagination {
+  color: #fff;
+}

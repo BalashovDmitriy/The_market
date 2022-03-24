@@ -1,0 +1,54 @@
+.popup__container {
+  top: 200px;
+  max-width: 800px;
+  width: 60%;
+  height: 400px;
+  background-color: #1f1f47;
+  position: relative;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 30px 36px 37px 36px;
+  margin: 0 auto;
+
+  @media screen and (max-width: 950px) {
+    width: 92%;
+    padding: 30px 16px;
+  }
+
+  @media screen and (max-width: 420px) {
+    height: 600px;
+    top: 80px;
+  }
+}
+
+.close-button_form {
+  right: 2%;
+  top: 10px;
+}
+
+.popup__container-comment {
+  top: 200px;
+  width: 400px;
+  height: 300px;
+  background-color: #1f1f47;
+  position: relative;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 30px 36px 37px 36px;
+  margin: 0 auto;
+
+  @media screen and (min-width: 420px) and (max-width: 950px) {
+    width: 64%;
+    padding: 30px 16px;
+  }
+
+  @media screen and (max-width: 420px) {
+    height: 320px;
+    top: 80px;
+    width: 90%;
+  }
+}
+
+.userForm__label-comment {
+  width: 100%;
+}

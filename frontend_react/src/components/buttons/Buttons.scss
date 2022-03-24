@@ -1,0 +1,31 @@
+.buttons {
+    display: flex;
+    position: absolute;
+    justify-content: flex-end;
+    top: 12px;
+    right: 12px;
+    width: 100%;
+    z-index: 2;
+}
+
+.buttons-item {
+    width: 16px;
+    height: 16px;
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
+    background-color: inherit;
+    border: none;
+    cursor: pointer;
+    &:hover{
+        opacity: 0.3;
+    }
+}
+
+.edit {
+    background-image: url(../../images/draw.png);
+    margin-right: 12px;
+}
+
+.delite {
+    background-image: url(../../images/close.png);
+}

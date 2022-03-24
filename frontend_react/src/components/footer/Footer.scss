@@ -1,0 +1,14 @@
+.Footer {
+    max-width: 1440px;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+    padding-bottom: 20px;
+    @media screen and (max-width: 800px) {
+        @include flexColumn();
+    }
+}
+
+.Footer__copyright {
+    font-size: 0.8em;
+}
