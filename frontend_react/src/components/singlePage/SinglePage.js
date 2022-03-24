@@ -13,8 +13,8 @@ function SinglePage() {
   const [comments, setComments] = useState([]);
   const api = useAxios();
   let ad_pk = id;
-  let { authTokens } = useContext(AuthContext);
-  const { userInfo, isEditPopupOpen, closePopup, setAds, handleOpenEditPopup } =
+  let { authTokens, user } = useContext(AuthContext);
+  const { isEditPopupOpen, closePopup, setAds, handleOpenEditPopup } =
     useContext(MainContext);
   let history = useHistory();
 
@@ -79,39 +79,50 @@ function SinglePage() {
   };
 
   return (
-    <main className="CardInformation">
+    <main className="cardInformation">
       {product && (
         <>
-          <h1 className="CardInformation__title">{product.title}</h1>
-          <div className="CardInformation__container">
-            {userInfo.id !== product.author_id ? null : (
+          <h1 className="cardInformation__title">{product.title}</h1>
+          <div className="cardInformation__container">
+            {user.user_id !== product.author_id ? null : (
               <Buttons
+              user={user}
+              product={product}
                 onOpen={handleOpenEditPopup}
                 className="buttons"
                 classButton="buttons-item"
                 onSubmit={deleteAdd}
               />
             )}
-            <img
-              src={product.image}
-              alt="img"
-              className="CardInformation__img"
-            />
-            <div className="CardInformation__box">
-              <p className="CardInformation__price">{product.price} &#8381;</p>
-              <p className="CardInformation__description">
+            {product.image === null ? (
+              <div className="cardInformation__img-null" />
+            ) : (
+              <img
+                src={product.image}
+                className="cardInformation__img"
+                alt="product img"
+              />
+            )}
+            <div className="cardInformation__box">
+              <p className="cardInformation__price">{product.price} &#8381;</p>
+              <p className="cardInformation__description">
                 {product.description}
               </p>
             </div>
-            <div className="CardInformation__box box-2">
-              <div className="CardInformation__box_second">
-                <p className="CardInformation__tel">{product.phone}</p>
-                <p className="CardInformation__tel">
+            <div className="cardInformation__box box-2">
+              <div className="cardInformation__box_second">
+                <p className="cardInformation__tel">{product.phone}</p>
+                <p className="cardInformation__tel">
                   {product.author_first_name}
                 </p>
               </div>
             </div>
-            <CommentContainer comments={comments} addComment={addComment} setComments={setComments}/>
+            <CommentContainer
+              comments={comments}
+              addComment={addComment}
+              setComments={setComments}
+              user={user}
+            />
           </div>
           <EditPopup
             isEditPopupOpen={isEditPopupOpen}

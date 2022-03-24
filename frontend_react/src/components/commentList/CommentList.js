@@ -1,7 +1,7 @@
 import React from "react";
 import Comment from "../comment/Comment";
 
-function CommentList({ comments, setComments}) {
+function CommentList({ comments, setComments, user}) {
 
   return (
     <ul className="Comment__list">
@@ -15,6 +15,7 @@ function CommentList({ comments, setComments}) {
             userId={comment.author_id}
             setComments={setComments}
             authorName={comment.author_first_name}
+            user={user}
           />
         );
       })}

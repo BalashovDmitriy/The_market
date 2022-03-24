@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import useFormValidation from "../../utils/hooks/useFormValidation";
 
 function EmailLink() {
   const [email, setEmail] = useState("");
   const { errors } = useFormValidation();
+  const history = useHistory();
 
   const handleChange = (e) => {
     setEmail(e.target.value);
@@ -23,8 +25,7 @@ function EmailLink() {
       redirect: "follow",
     };
     fetch("http://127.0.0.1:8000/users/reset_password/", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then(() => history.push("/sign-in"))
       .catch((error) => console.log("error", error));
   }
 
