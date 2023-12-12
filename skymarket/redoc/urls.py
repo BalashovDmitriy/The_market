@@ -1,5 +1,6 @@
 from django.urls import path
-from redoc.views import redoc, redoc_json
+
+from redoc.views import redoc_json, redoc
 
 urlpatterns = [
     path("", redoc),
