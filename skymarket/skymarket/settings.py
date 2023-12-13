@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "redoc",
     "corsheaders",
     "drf_yasg",
+    "djoser",
 ]
 
 
@@ -90,8 +91,10 @@ REST_FRAMEWORK = {
 }
 # Здесь мы настраиваем Djoser
 DJOSER = {
-    "LOGIN_REDIRECT_URL": "/",
-    "LOGOUT_REDIRECT_URL": "/",
+    'SERIALIZERS': {
+        'user_create': 'users.serializers.UserRegistrationSerializer'
+    },
+    'LOGIN_FIELD': 'email'
 }
 
 # Database

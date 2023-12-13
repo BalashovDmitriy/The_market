@@ -11,6 +11,5 @@ class UserRoles:
 
 
 class User(AbstractBaseUser):
-    # TODO переопределение пользователя.
-    # TODO подробности также можно поискать в рекоммендациях к проекту
+
     pass
