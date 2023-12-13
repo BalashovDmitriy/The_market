@@ -3,7 +3,7 @@ from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.translation import gettext_lazy as _
 
-from skymarket.users.managers import UserManager
+from users.managers import UserManager
 
 
 class UserRoles:
@@ -11,13 +11,19 @@ class UserRoles:
     USER = "user"
 
 
-class User(AbstractUser):
+choices = (
+    (UserRoles.ADMIN, "Admin"),
+    (UserRoles.USER, "User"),
+)
+
+
+class User(AbstractBaseUser):
     first_name = models.CharField(verbose_name=_("first name"), max_length=50)
     last_name = models.CharField(verbose_name=_("last name"), max_length=50)
     phone = PhoneNumberField(verbose_name=_("phone number"), unique=True)
     email = models.EmailField(verbose_name=_("email address"), unique=True)
     image = models.ImageField(verbose_name=_("profile image"), upload_to="profile_images")
-    role = models.CharField(verbose_name=_("user role"), max_length=10, default=UserRoles.USER, choices=UserRoles.USER)
+    role = models.CharField(verbose_name=_("user role"), max_length=5, choices=choices)
 
     objects = UserManager()
     USERNAME_FIELD = "email"
@@ -25,7 +31,7 @@ class User(AbstractUser):
 
     @property
     def is_admin(self):
-        return self.role == UserRoles.ADMIN  #
+        return self.role == UserRoles.ADMIN
 
     @property
     def is_user(self):
