@@ -1,7 +1,6 @@
-from django.urls import include, path
 from rest_framework import routers
 
-from skymarket.ads.views import AdViewSet, CommentViewSet
+from ads.views import AdViewSet, CommentViewSet
 
 router = routers.DefaultRouter()
 router.register(r'ads', AdViewSet)

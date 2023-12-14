@@ -1,7 +1,7 @@
 from rest_framework import pagination, viewsets
 
-from skymarket.ads.models import Ad, Comment
-from skymarket.ads.serializers import AdSerializer, CommentSerializer
+from ads.models import Ad, Comment
+from ads.serializers import AdSerializer, CommentSerializer
 
 
 class AdPagination(pagination.PageNumberPagination):
