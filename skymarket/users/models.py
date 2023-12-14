@@ -20,9 +20,9 @@ NULLABLE = {'null': True, 'blank': True}
 
 
 class User(AbstractBaseUser):
-    first_name = models.CharField(verbose_name=_("first name"), max_length=50, **NULLABLE)
-    last_name = models.CharField(verbose_name=_("last name"), max_length=50, **NULLABLE)
-    phone = PhoneNumberField(verbose_name=_("phone number"), **NULLABLE)
+    first_name = models.CharField(verbose_name=_("first name"), max_length=50)
+    last_name = models.CharField(verbose_name=_("last name"), max_length=50)
+    phone = PhoneNumberField(verbose_name=_("phone number"))
     email = models.EmailField(verbose_name=_("email address"), unique=True)
     image = models.ImageField(verbose_name=_("profile image"), upload_to="profile_images", **NULLABLE)
     role = models.CharField(verbose_name=_("user role"), max_length=5, default=UserRoles.USER, choices=choices)

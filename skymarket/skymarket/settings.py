@@ -75,9 +75,11 @@ REST_FRAMEWORK = {
 
 DJOSER = {
     'SERIALIZERS': {
-        'user_create': 'users.serializers.UserRegistrationSerializer'
+        'user_create': 'users.serializers.UserRegistrationSerializer',
+        'user': 'users.serializers.UserListSerializer',
+        'current_user': 'users.serializers.CurrentUserSerializer',
     },
-    'LOGIN_FIELD': 'email'
+    'LOGIN_FIELD': 'email',
 }
 
 # Настройки БД
