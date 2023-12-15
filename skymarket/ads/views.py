@@ -1,5 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import pagination, viewsets
+from rest_framework import pagination, viewsets, permissions
 
 from ads.models import Ad, Comment
 from ads.serializers import AdSerializer, CommentSerializer, AdDetailSerializer
@@ -16,6 +16,10 @@ class AdViewSet(viewsets.ModelViewSet):
     pagination_class = AdPagination
     filter_backends = (DjangoFilterBackend,)
     filterset_class = AdFilter
+
+    def get_permissions(self):
+        if self.action == "list":
+            self.permission_classes = (permissions.IsAuthenticated,)
 
     def get_serializer_class(self):
         if self.action == "list":
