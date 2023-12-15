@@ -26,6 +26,7 @@ class User(AbstractBaseUser):
     email = models.EmailField(verbose_name=_("email address"), unique=True)
     image = models.ImageField(verbose_name=_("profile image"), upload_to="profile_images", **NULLABLE)
     role = models.CharField(verbose_name=_("user role"), max_length=5, default=UserRoles.USER, choices=choices)
+    is_active = models.BooleanField(verbose_name=_("active"), default=True)
 
     objects = UserManager()
     USERNAME_FIELD = "email"
