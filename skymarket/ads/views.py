@@ -61,3 +61,7 @@ class AdViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+
+    def get_queryset(self):
+        queryset = Comment.objects.filter(ad_id=self.kwargs['ad_pk'])
+        return queryset
