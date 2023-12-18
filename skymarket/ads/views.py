@@ -7,6 +7,7 @@ from ads.serializers import (
     CommentSerializer,
     AdDetailSerializer,
     AdCreateSerializer,
+    CommentCreateSerializer
 )
 
 from ads.filters import AdFilter
@@ -38,7 +39,6 @@ class AdViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrStaff]
 
     def get_permissions(self):
-        print(self.action)
         if self.action == "list":
             self.permission_classes = [permissions.AllowAny]
         return super().get_permissions()
@@ -61,3 +61,15 @@ class AdViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+
+    def get_queryset(self):
+        queryset = Comment.objects.filter(ad_id=self.kwargs['ad_pk'])
+        return queryset
+
+    def get_serializer_class(self):
+        if self.action == "create" or self.action == "update" or self.action == "partial_update":
+            return CommentCreateSerializer
+        return CommentSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user, ad_id=self.kwargs['ad_pk'])
