@@ -41,6 +41,8 @@ class AdViewSet(viewsets.ModelViewSet):
     def get_permissions(self):
         if self.action == "list":
             self.permission_classes = [permissions.AllowAny]
+        elif self.action == "retrieve":
+            self.permission_classes = [permissions.IsAuthenticated]
         return super().get_permissions()
 
     def get_serializer_class(self):
@@ -61,6 +63,7 @@ class AdViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrStaff]
 
     def get_queryset(self):
         queryset = Comment.objects.filter(ad_id=self.kwargs['ad_pk'])
