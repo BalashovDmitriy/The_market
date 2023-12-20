@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import pagination, viewsets, permissions, generics
 
@@ -7,12 +8,14 @@ from ads.serializers import (
     CommentSerializer,
     AdDetailSerializer,
     AdCreateSerializer,
-    CommentCreateSerializer
+    CommentCreateSerializer,
 )
 
 from ads.filters import AdFilter
 
 from ads.permissions import IsOwnerOrStaff
+
+from skymarket.settings import EMAIL_HOST_USER
 
 
 class AdPagination(pagination.PageNumberPagination):
@@ -40,6 +43,12 @@ class AdViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.action == "list":
+            send_mail(
+                subject='Тест',
+                message='Тест',
+                from_email=EMAIL_HOST_USER,
+                recipient_list=[self.request.user.email]
+            )
             self.permission_classes = [permissions.AllowAny]
         return super().get_permissions()
 
@@ -61,15 +70,20 @@ class AdViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrStaff]
 
     def get_queryset(self):
-        queryset = Comment.objects.filter(ad_id=self.kwargs['ad_pk'])
+        queryset = Comment.objects.filter(ad_id=self.kwargs["ad_pk"])
         return queryset
 
     def get_serializer_class(self):
-        if self.action == "create" or self.action == "update" or self.action == "partial_update":
+        if (
+            self.action == "create"
+            or self.action == "update"
+            or self.action == "partial_update"
+        ):
             return CommentCreateSerializer
         return CommentSerializer
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user, ad_id=self.kwargs['ad_pk'])
+        serializer.save(author=self.request.user, ad_id=self.kwargs["ad_pk"])

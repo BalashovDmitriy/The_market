@@ -129,4 +129,4 @@ dmypy.json
 .pyre/
 .DS_Store
 .idea/
-./django_static
+skymarket/django_static

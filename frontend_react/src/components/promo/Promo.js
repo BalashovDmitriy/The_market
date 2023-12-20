@@ -9,7 +9,7 @@ function Promo({ pageQty, ad, setAd, user, setPage, page }) {
       <MediaQuery minWidth={801}>
         <div className="promo__box">
           <div className="promo__title-box">
-            <h2 className="promo__title">ADS-ONLINE</h2>
+            <h2 className="promo__title">The_market</h2>
             <p className="promo__subtitle">
               Лучшая платформа для продажи вещей
             </p>
@@ -18,7 +18,7 @@ function Promo({ pageQty, ad, setAd, user, setPage, page }) {
         </div>
       </MediaQuery>
       <MediaQuery maxWidth={800}>
-        <h2 className="promo__title">ADS-ONLINE</h2>
+        <h2 className="promo__title">The_market</h2>
         <p className="promo__subtitle">Лучшая платформа для продажи вещей</p>
         <SearchForm ad={ad} setAd={setAd} user={user} page={page} />
       </MediaQuery>
