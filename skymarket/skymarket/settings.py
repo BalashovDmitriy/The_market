@@ -74,9 +74,21 @@ REST_FRAMEWORK = {
     "PAGE_SIZE": 10,
 }
 
+
+# Настройки почты
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_USE_SSL = True
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+
 # Настройки Djoser
 
 DJOSER = {
+    'PASSWORD_RESET_CONFIRM_URL': '/api/users/reset_password_confirm/{uid}/{token}',
+    'USERNAME_RESET_CONFIRM_URL': '/api/users/reset_password_confirm/{uid}/{token}',
     'SERIALIZERS': {
         'user_create': 'users.serializers.UserRegistrationSerializer',
         'user': 'users.serializers.CurrentUserSerializer',
@@ -142,15 +154,6 @@ CORS_ALLOWED_ORIGINS = [
 # Default primary key field type
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
-# Настройки почты
-
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_USE_SSL = True
-EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-EMAIL_PORT = os.getenv("EMAIL_PORT")
 
 # Переопределение модели пользователей
 
