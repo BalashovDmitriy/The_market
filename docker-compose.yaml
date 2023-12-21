@@ -17,6 +17,8 @@ services:
 
   frontend:
     build: frontend_react/.
+    env_file:
+      - skymarket/.env
     volumes:
       - frontend:/app/build
     depends_on:
