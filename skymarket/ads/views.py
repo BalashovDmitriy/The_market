@@ -68,6 +68,11 @@ class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrStaff]
 
+    def get_permissions(self):
+        if self.action == "list" or self.action == "retrieve":
+            self.permission_classes = [permissions.IsAuthenticated]
+        return super().get_permissions()
+
     def get_queryset(self):
         queryset = Comment.objects.filter(ad_id=self.kwargs["ad_pk"])
         return queryset
