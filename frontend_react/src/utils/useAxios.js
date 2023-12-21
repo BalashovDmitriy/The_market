@@ -4,9 +4,7 @@ import dayjs from 'dayjs'
 import { useContext } from 'react'
 import AuthContext from '../context/AuthContext'
 
-require('dotenv').config()
-const baseURL = 'http://' + process.env.BASE_URL + ':8001'
-
+const baseURL = 'http://158.160.133.241:8001';
 
 const useAxios = () => {
     const {authTokens, setUser, setAuthTokens} = useContext(AuthContext)
