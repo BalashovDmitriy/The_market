@@ -148,7 +148,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 # CORS
 
 CORS_ALLOWED_ORIGINS = [
-    os.getenv("BASE_URL") + ":3000"
+    "http://" + os.getenv("BASE_URL") + ":3000"
 ]
 
 # Default primary key field type
