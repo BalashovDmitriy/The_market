@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 import { useContext } from 'react'
 import AuthContext from '../context/AuthContext'
 
-
+require('dotenv').config()
 const baseURL = 'http://' + process.env.BASE_URL + ':8001'
 
 
