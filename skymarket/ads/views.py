@@ -43,12 +43,6 @@ class AdViewSet(viewsets.ModelViewSet):
 
     def get_permissions(self):
         if self.action == "list":
-            send_mail(
-                subject='Тест',
-                message='Тест',
-                from_email=EMAIL_HOST_USER,
-                recipient_list=[self.request.user.email]
-            )
             self.permission_classes = [permissions.AllowAny]
         return super().get_permissions()
 
