@@ -19,8 +19,7 @@ export const AuthProvider = ({ children }) => {
   );
   let [loading, setLoading] = useState(true);
 
-  require('dotenv').config();
-  const BASE_URL = "http://" + process.env.BASE_URL + ":8001/api";
+  const BASE_URL = "http://158.160.133.241:8001/api";
 
   const history = useHistory();
   //login

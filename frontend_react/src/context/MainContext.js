@@ -17,8 +17,8 @@ export const MainContextStates = ({ children }) => {
   const api = useAxios();
   let { authTokens } = useContext(AuthContext);
 
-  require('dotenv').config();
-  const BASE_URL = "http://" + process.env.BASE_URL + ":8001/api";
+  const BASE_URL = "http://158.160.133.241:8001/api";
+
   const BASE_URL_OPEN = `${BASE_URL}/ads/?`;
   const BASE_URL_ADS = `/api/ads/?`;
 
@@ -168,8 +168,9 @@ export const MainContextStates = ({ children }) => {
 
   //add new ad
   const addAd = async ({ image, title, price, description }) => {
-    require('dotenv').config();
-    const url = "http://" + process.env.BASE_URL + ":8001/api/ads/";
+
+    const url = "http://158.160.133.241:8001/api/ads/";
+
     const formData = new FormData();
     formData.append("image", image);
     formData.append("title", `${title}`);
