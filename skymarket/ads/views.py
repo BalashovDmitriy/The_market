@@ -1,4 +1,3 @@
-from django.core.mail import send_mail
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import pagination, viewsets, permissions, generics
 
@@ -14,8 +13,6 @@ from ads.serializers import (
 from ads.filters import AdFilter
 
 from ads.permissions import IsOwnerOrStaff
-
-from skymarket.settings import EMAIL_HOST_USER
 
 
 class AdPagination(pagination.PageNumberPagination):
